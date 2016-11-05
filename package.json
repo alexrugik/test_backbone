@@ -1,0 +1,28 @@
+{
+  "name": "reactjs_starter",
+  "version": "1.0.0",
+  "description": "own starter for react projects",
+  "main": "index.js",
+  "dependencies": {
+    "copy-webpack-plugin": "^4.0.0",
+    "webpack": "^1.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "http": "http-server -p 7777",
+    "start": "webpack-dev-server",
+    "watch": "webpack -w",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexrugik/reactJS-own-starter.git"
+  },
+  "author": "alexrugik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexrugik/reactJS-own-starter/issues"
+  },
+  "homepage": "https://github.com/alexrugik/reactJS-own-starter#readme"
+}
