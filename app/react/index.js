@@ -1,1 +1,4 @@
-'<h1>Hello, world!</h1>'
+import React from 'react';
+import {render} from 'react-dom';
+
+render(<div>hello world</div>, document.getElementById('container'));
