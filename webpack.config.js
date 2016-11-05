@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-//const WebpackDevServer = require("webpack-dev-server");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -9,11 +8,20 @@ module.exports = {
     path: path.resolve(__dirname, 'web'),
     filename: 'bundle.js'
   },
+  resolve: {
+    extensions: ['', '.js', '.json', '.css', '.html'],
+    modulesDirectories: ['node_modules', 'bower_components']
+  },
+  devtool: "source-map",
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.HotModuleReplacementPlugin({
       multiStep: true
+    }),
+    new webpack.ProvidePlugin({
+      'jQuery': 'jquery',
     }),
     new CopyWebpackPlugin([
         {
@@ -25,10 +33,19 @@ module.exports = {
         copyUnmodified: true
       }
     ),
-
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      beautify: true,
+      mangle: false
+    })
   ],
+
   module: {
-    loaders: []
+    loaders: [
+      { test: /\.js$/, exclude: [/node_modules/, /bower_components/], loader: "babel-loader" }
+    ]
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'web'),
