@@ -3,14 +3,14 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: ['./app/react/index.js'],
+  entry: ['./app/index.js'],
   output: {
     path: path.resolve(__dirname, 'web'),
     filename: 'bundle.js'
   },
   resolve: {
     extensions: ['', '.js', '.json', '.css', '.html'],
-    modulesDirectories: ['node_modules', 'bower_components']
+    modulesDirectories: ['node_modules', 'bower_components', 'app']
   },
   devtool: "source-map",
   plugins: [
