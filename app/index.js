@@ -1,7 +1,2 @@
-import React from 'react';
-import {render} from 'react-dom';
-
-import Hello from './source/hello';
-
-
-render(<Hello name='Alex'/>, document.getElementById('container'));
+import First from './source/first-task';
+import Second from './source/second-task';
