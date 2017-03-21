@@ -18,7 +18,6 @@ export default class ObjectCreator {
         }
         this.__convertedStringChanged = true;
         this.__convertedString = convertedString;
-        return this;
     }
 
     getObject() {
