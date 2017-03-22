@@ -6,23 +6,25 @@ export default function (sentence, ignoreCapitalLetter = false) {
         throw new Error('No sentence for converting to object!');
     }
 
-    const cleanArr = sentence.split(' ').map(str => getCleanString(str));
-    return convertToObjectFromArray(cleanArr, ignoreCapitalLetter);
+    return convertToObjectFromArray(sentence.split(' '), ignoreCapitalLetter);
 }
 
 function convertToObjectFromArray(arr, ignoreCapitalLetter) {
     const objectFromArray = {};
 
     if (ignoreCapitalLetter) {
-        arr = arr.map(string => string.toLowerCase());
+        arr = arr.map(word => word.toLowerCase());
     }
 
-    arr.forEach(string => {
-        if (!objectFromArray [string]) {
-            objectFromArray [string] = 1;
+    arr.forEach(word => {
+
+        word = getCleanString(word);
+
+        if (!objectFromArray [word]) {
+            objectFromArray [word] = 1;
             return;
         }
-        objectFromArray [string] += 1;
+        objectFromArray [word] += 1;
     });
     return objectFromArray;
 }
