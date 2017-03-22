@@ -1,7 +1,7 @@
 # cleanJs
 clean Js with webpack
 
-//Start project
+//Start project:
 npm i;
 webpack;
 npm run start;
