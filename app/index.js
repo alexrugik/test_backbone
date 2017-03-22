@@ -3,13 +3,10 @@ import StringReverser from './source/second-task';
 
 const str = 'Wake up, Neo. The Matrix has you... Follow the white rabbit. Knock, knock, Neo.';
 
-const obj = new ObjectCreator(str, true);
-const resultOne = obj.getObject();
+const resultOne = ObjectCreator(str);
 console.log(resultOne);
 
-const obj2 = new ObjectCreator();
-obj2.convertedString = str;
-const resultTwo = obj2.getObject();
+const resultTwo = ObjectCreator(str, true);
 console.log(resultTwo);
 
 //-----------------------------------------------//
