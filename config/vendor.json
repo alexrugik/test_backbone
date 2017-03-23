@@ -2,6 +2,7 @@
   "dependencies": [
     "backbone",
     "underscore",
-    "jquery"
+    "jquery",
+    "bootstrap"
   ]
 }

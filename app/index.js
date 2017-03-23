@@ -1,1 +1,4 @@
-console.log('hello world')
+import './assets/assets.module';
+
+
+var test = 25;
