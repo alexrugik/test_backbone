@@ -25,7 +25,7 @@ class Router {
         });
     }
 
-    state isValidState(hash) {
+    isValidState(hash) {
         return Routes[hash] && Routes[hash].template;
     }
 }
