@@ -8,14 +8,15 @@ const vendor = require('./config/vendor.json');
 module.exports = {
     entry: {
         bundle: ['./app/index.js'],
-        vendor: vendor.dependencies
+        vendor: vendor.dependencies,
+        assets: ['./app/assets/index.js']
     },
     output: {
         path: path.resolve(__dirname, 'web'),
         filename: '[name].js',
         resolve: {
             extensions: ['', '.js', '.json', '.css', '.html'],
-            modulesDirectories: ['node_modules', 'bower_components', 'app']
+            modulesDirectories: ['node_modules', 'bower_components', 'app', 'app/assets']
         }
     },
     devtool: "source-map",
