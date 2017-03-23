@@ -11,21 +11,57 @@ class Router {
     }
 
     startRouter() {
-        window.addEventListener('hashchange', (event) => {
-            const hash = document.location.hash;
+        this.initEventListeners();
+    }
 
-            if (!this.isValidState(hash)) {
-                return;
-            }
+    initEventListeners() {
+        document.addEventListener('DOMContentLoaded', this.__domLoadedCallBack.bind(this));
+        window.addEventListener('hashchange', this.__hashChangeCallBack.bind(this), true);
+    }
 
-            window.history.pushState(hash, 'Title fdg', `/${hash.slice(1)}`);
-            $.get(Routes[hash].template, function (data) {
-                document.getElementById('view-main').innerHTML = data;
-            });
+    changeUrl(state) {
+        if (!state) {
+            throw new Error('No State for changeUrl')
+        }
+
+        window.history.pushState(state.url, false, state.url);
+
+        $.get(state.template, function (data) {
+            document.getElementById('view-main').innerHTML = data;
         });
     }
 
-    isValidState(hash) {
+    __domLoadedCallBack() {
+        const pathname = document.location.pathname;
+
+        let state;
+
+        Object.keys(Routes).findIndex(key => {
+            if (Routes[key].url === pathname) {
+                state = Routes[key]
+            }
+            return Routes[key].url === pathname;
+        });
+
+        if (!state) {
+            return;
+        }
+        this.changeUrl(state);
+    }
+
+    __hashChangeCallBack() {
+        const hash = document.location.hash;
+
+        if (!this.__isValidState(hash)) {
+            return;
+        }
+
+        const state = Routes[hash];
+
+        this.changeUrl(state);
+    }
+
+    __isValidState(hash) {
         return Routes[hash] && Routes[hash].template;
     }
 }
