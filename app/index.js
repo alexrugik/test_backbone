@@ -1,2 +1,3 @@
-var test = 25;
-console.log(test);
+import Router from './source/router/router';
+
+Router('default').startRouter();

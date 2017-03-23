@@ -4,7 +4,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const vendor = require('./config/vendor.json');
 
-
 module.exports = {
     entry: {
         bundle: ['./app/index.js'],
@@ -37,7 +36,13 @@ module.exports = {
                     context: path.resolve(__dirname, 'app'),
                     from: '*.html',
                     to: path.resolve(__dirname, 'web')
-                }],
+                },
+                {
+                    context:path.resolve(__dirname, 'app'),
+                    from: '**/*.html',
+                    to: path.resolve(__dirname, 'web')
+                },
+                ],
             {
                 copyUnmodified: true
             }
@@ -79,7 +84,7 @@ module.exports = {
         hot: true,
         watch: true,
         watchOptions: {
-            aggregateTimeout: 300,
+            aggregateTimeout: 1000,
             poll: 1000
         },
         inline: true,
