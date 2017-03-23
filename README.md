@@ -1,6 +1,4 @@
-# cleanJs
-clean Js with webpack
-
+# BackBone
 //Start project:
 npm i;
 webpack;
