@@ -1,16 +1,17 @@
-import Routes from './routes';
-
-
 export default function (defaultRoute) {
     return new Router(defaultRoute)
 }
 
 class Router {
-    constructor(defaultRoute = 'default') {
+    constructor(config, defaultRoute = 'default') {
+        this.config = config;
         this.defaultRoute = defaultRoute;
     }
 
     startRouter() {
+        if (!this.config) {
+            throw new Error('no config for Router!')
+        }
         this.initEventListeners();
     }
 
@@ -28,6 +29,7 @@ class Router {
 
         $.get(state.template, function (data) {
             document.getElementById('view-main').innerHTML = data;
+            state.controller();
         });
     }
 
@@ -36,11 +38,11 @@ class Router {
 
         let state;
 
-        Object.keys(Routes).findIndex(key => {
-            if (Routes[key].url === pathname) {
-                state = Routes[key]
+        Object.keys(this.config).findIndex(key => {
+            if (this.config[key].url === pathname) {
+                state = this.config[key]
             }
-            return Routes[key].url === pathname;
+            return this.config[key].url === pathname;
         });
 
         if (!state) {
@@ -56,13 +58,13 @@ class Router {
             return;
         }
 
-        const state = Routes[hash];
+        const state = this.config[hash];
 
         this.changeUrl(state);
     }
 
     __isValidState(hash) {
-        return Routes[hash] && Routes[hash].template;
+        return this.config[hash] && this.config[hash].template;
     }
 }
 
