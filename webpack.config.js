@@ -42,6 +42,11 @@ module.exports = {
                     from: '**/*.html',
                     to: path.resolve(__dirname, 'web')
                 },
+                {
+                    context:path.resolve(__dirname, 'app'),
+                    from: '**/*.json',
+                    to: path.resolve(__dirname, 'web')
+                },
                 ],
             {
                 copyUnmodified: true

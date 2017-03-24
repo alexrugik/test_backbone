@@ -7,14 +7,31 @@
 </head>
 <body>
     <div class="container">
-        <ul>
-            <li>
-                <a href="#view-one">view one</a>
-                <a href="#view-two">view two</a>
-            </li>
-        </ul>
+        <div class="row"></div>
+            <ul>
+                <li>
+                    <a href="#view-one">view one</a>
+                    <a href="#view-two">view two</a>
+                </li>
+            </ul>
         <div class="row">
             <div id="view-main"></div>
+
+            <div id="users"></div>
+                <ul>
+                    <script id="usersTemplate" type="text/template">
+                        <li class="users">
+                            <div class="info">
+                                <div class="id"> id: <%= id %></div>
+                                <div class="name">name: <%= name %></div>
+                                <div class="age">age: <%= age %></div>
+                                <div class="gender">gender: <%= gender %></div>
+                                <div class="company"> company: <%= company %></div>
+                            </div>
+                        </li>
+                    </script>
+                </ul>
+
         </div>
     </div>
 <script src="vendor.js"></script>
