@@ -34,7 +34,7 @@ class Router {
             window.history.pushState(state.url, false, state.url);
         }
 
-        $.get(state.template, function (data) {
+        $.get(`${window.location.origin}/${state.template}`, function (data) {
             document.getElementById('view-main').innerHTML = data;
             state.controller(state.params);
         });
@@ -42,6 +42,8 @@ class Router {
 
     __domLoadedCallBack() {
         const pathname = document.location.pathname;
+
+        console.log(pathname);
 
         let state;
         Object.keys(this.config).findIndex(key => {
@@ -59,7 +61,6 @@ class Router {
 
     __hashChangeCallBack() {
         const state = this.__getStateByHash(this.config);
-        console.log('state', state);
         this.changeUrl(state);
     }
 

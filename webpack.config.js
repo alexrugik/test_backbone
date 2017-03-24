@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const vendor = require('./config/vendor.json');
-
+console.log('77777777777777777777 =', path.resolve(__dirname, 'web'));
 module.exports = {
     entry: {
         bundle: ['./app/index.js'],
@@ -85,7 +85,7 @@ module.exports = {
     },
     devServer: {
         contentBase: path.resolve(__dirname, 'web'),
-        outputPath: path.resolve(__dirname, 'app'),
+        outputPath: path.resolve(__dirname, 'web'),
         hot: true,
         watch: true,
         watchOptions: {
