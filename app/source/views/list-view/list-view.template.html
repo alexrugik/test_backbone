@@ -3,37 +3,27 @@
 
     <table id="users" style="width:100%">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>AGE</th>
-                <th>GENDER</th>
-                <th>COMPANY</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>GENDER</th>
+            <th>COMPANY</th>
+        </tr>
         </thead>
         <tbody>
-            <script id="usersTemplate" type="text/template">
-                <tr class="users">
-                    <td class="id"> id: <%= id %></td>
-                    <td class="name">
-                        <a href="<%= '#user/' + id %>"><%= name %></a>
-                        <p> name: <%= name %></p>
-                    </td>
-                    <td class="age">age: <%= age %></td>
-                    <td class="gender">gender: <%= gender %></td>
-                    <td class="company"> company: <%= company %></td>
-                </tr>
-                <!--<li class="users">
-                        <div class="id"> id: <%= id %></div>
-                        <div class="name">
-                            <a href="<%= '#user/' + id %>"><%= name %></a>
-                            <p> name: <%= name %></p>
-                        </div>
-                        <div class="age">age: <%= age %></div>
-                        <div class="gender">gender: <%= gender %></div>
-                        <div class="company"> company: <%= company %></div>
-                </li>-->
-            </script>
+        <script id="usersTemplate" type="text/template">
+            <tr class="users">
+                <td class="id"><%= id %></td>
+                <td class="name">
+                    <a href="<%= '#user/' + id %>"><%= name %></a>
+                </td>
+                <td class="age"><%= age %></td>
+                <td class="gender"><%= gender %></td>
+                <td class="company"><%= company %></td>
+            </tr>
+
+        </script>
         </tbody>
     </table>
 </div>
