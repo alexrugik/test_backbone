@@ -25,11 +25,18 @@ class Router {
             throw new Error('No State for changeUrl')
         }
 
-        window.history.pushState(state.url, false, state.url);
+        if (state.params) {
+            const parsedUrl = state.url.split(':');
+            const paramToUrl = parsedUrl[1];
+            const url = parsedUrl[0];
+            window.history.pushState(`${url}/${state.params[paramToUrl]}`, false, `${url}/${state.params[paramToUrl]}`);
+        } else {
+            window.history.pushState(state.url, false, state.url);
+        }
 
         $.get(state.template, function (data) {
             document.getElementById('view-main').innerHTML = data;
-            state.controller();
+            state.controller(state.params);
         });
     }
 
@@ -37,7 +44,6 @@ class Router {
         const pathname = document.location.pathname;
 
         let state;
-
         Object.keys(this.config).findIndex(key => {
             if (this.config[key].url === pathname) {
                 state = this.config[key]
@@ -52,15 +58,34 @@ class Router {
     }
 
     __hashChangeCallBack() {
+        const state = this.__getStateByHash(this.config);
+        console.log('state', state);
+        this.changeUrl(state);
+    }
+
+    __getStateByHash(config) {
         const hash = document.location.hash;
 
-        if (!this.__isValidState(hash)) {
+        // если точное совпадение, то возвращаем стейт
+        if (this.__isValidState(hash)) {
+            return config[hash];
+        }
+
+        if (!hash.includes('/')) {
             return;
         }
 
-        const state = this.config[hash];
+        const keysWithInclude = Object.keys(config).filter(key => hash.includes(key.split(':')[0]));
 
-        this.changeUrl(state);
+        const params = {};
+        if (keysWithInclude.length === 1) {
+            keysWithInclude.forEach(key => {
+                params[key.split(':')[1]] = hash.split('/')[1];
+            });
+            const state = config[keysWithInclude.pop()];
+            state.params = params;
+            return state;
+        }
     }
 
     __isValidState(hash) {

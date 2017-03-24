@@ -2,8 +2,7 @@ import _ from 'underscore';
 
 export default Backbone.View.extend({
     el: '#users',
-    template: _.template($('#usersTemplate').html()),
-
+    template: '#usersTemplate',
     initialize() {
         console.log('users view = ', this);
         this.listenTo(this.model, 'sync', () => {
@@ -12,11 +11,11 @@ export default Backbone.View.extend({
         this.model.fetch();
     },
     render(eventName) {
+        const template = _.template($(this.template).html());
         _.each(this.model.models, (user) => {
-            $(this.el).append(this.template(user.toJSON()));
+            $(this.el).append(template(user.toJSON()));
         }, this);
         return this;
     },
     events: {}
-
 });

@@ -1,5 +1,5 @@
-export default testController;
+import UsersComponent from '../users/users';
 
-function testController(params) {
-    console.log('testController');
+export default function testController(params) {
+    UsersComponent.mount().render();
 }
