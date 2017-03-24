@@ -2,3 +2,25 @@ li {
     list-style: none;
     display: inline;
 }
+
+#users  thead tr{
+    border-top: solid 1px lightgrey;
+    border-bottom: solid 1px lightgrey;
+    background: #fafafa;
+}
+#users .users:hover{
+    background: #fafafa;
+    border-top: solid 1px lightgrey;
+    border-bottom: solid 1px lightgrey;
+}
+
+#user  thead tr{
+    border-top: solid 1px lightgrey;
+    border-bottom: solid 1px lightgrey;
+    background: #fafafa;
+}
+#user .user:hover{
+    background: #fafafa;
+    border-top: solid 1px lightgrey;
+    border-bottom: solid 1px lightgrey;
+}

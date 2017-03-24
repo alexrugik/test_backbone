@@ -43,8 +43,6 @@ class Router {
     __domLoadedCallBack() {
         const pathname = document.location.pathname;
 
-        console.log(pathname);
-
         let state;
         Object.keys(this.config).findIndex(key => {
             if (this.config[key].url === pathname) {

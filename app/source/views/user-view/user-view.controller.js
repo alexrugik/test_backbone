@@ -1,3 +1,5 @@
+import UserComponent from '../../components/user/user';
+
 export default function userViewController(params) {
-    console.log('user view params = ', params);
+    const users = UserComponent.mount(params);
 }

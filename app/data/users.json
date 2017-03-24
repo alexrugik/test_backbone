@@ -150,37 +150,5 @@
     "name": "Donovan Hernandez",
     "gender": "male",
     "company": "CENTREE"
-  },
-  {
-    "id": "58d4bcfeef83e1c4f9392773",
-    "age": 26,
-    "eyeColor": "blue",
-    "name": "Priscilla Young",
-    "gender": "female",
-    "company": "CANDECOR"
-  },
-  {
-    "id": "58d4bcfe8ab34b4889476cf2",
-    "age": 26,
-    "eyeColor": "green",
-    "name": "Colleen Rivers",
-    "gender": "female",
-    "company": "VINCH"
-  },
-  {
-    "id": "58d4bcfe12ed2a8800d48101",
-    "age": 39,
-    "eyeColor": "green",
-    "name": "Jennifer Weiss",
-    "gender": "female",
-    "company": "LUNCHPAD"
-  },
-  {
-    "id": "58d4bcfe1a18b49608a63b8b",
-    "age": 29,
-    "eyeColor": "blue",
-    "name": "Savage Fischer",
-    "gender": "male",
-    "company": "XANIDE"
   }
 ]

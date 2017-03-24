@@ -1,3 +1,23 @@
-<div>
-    user view
-</div>
+<table id="user" style="width:100%">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>GENDER</th>
+        <th>COMPANY</th>
+    </tr>
+    </thead>
+    <tbody>
+    <script id="userTemplate" type="text/template">
+        <tr class="user">
+            <td class="id"><%= id %></td>
+            <td class="name"><%= name %></td>
+            <td class="age"><%= age %></td>
+            <td class="gender"><%= gender %></td>
+            <td class="company"><%= company %></td>
+        </tr>
+
+    </script>
+    </tbody>
+</table>

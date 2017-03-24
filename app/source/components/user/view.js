@@ -1,8 +1,8 @@
 import _ from 'underscore';
 
 export default Backbone.View.extend({
-    el: '#users',
-    template: '#usersTemplate',
+    el: '#user',
+    template: '#userTemplate',
     initialize() {
         this.listenTo(this.model, 'sync', () => {
             this.render();
@@ -11,9 +11,7 @@ export default Backbone.View.extend({
     },
     render() {
         const template = _.template($(this.template).html());
-        _.each(this.model.models, (user) => {
-            $(this.el).append(template(user.toJSON()));
-        }, this);
+        $(this.el).append(template(this.model.toJSON()));
         return this;
     },
     events: {}
