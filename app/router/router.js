@@ -34,10 +34,13 @@ class Router {
             window.history.pushState(state.url, false, state.url);
         }
 
-        $.get(`${window.location.origin}/${state.template}`, function (data) {
-            document.getElementById('view-main').innerHTML = data;
-            state.controller(state.params);
-        });
+        fetch(`${window.location.origin}/${state.template}`)
+            .then(data => {
+                data.text().then(text => {
+                    document.getElementById('view-main').innerHTML = text;
+                    state.controller(state.params);
+                });
+            });
     }
 
     __domLoadedCallBack() {
