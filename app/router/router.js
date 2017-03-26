@@ -53,9 +53,9 @@ class Router {
             const parsedUrl = state.url.split(':');
             const url = parsedUrl[0];
             const paramToUrl = parsedUrl[1];
-            window.history.replaceState(`${url}${state.params[paramToUrl]}`, false, `${url}${state.params[paramToUrl]}`);
+            window.history.pushState(`${url}${state.params[paramToUrl]}`, false, `${url}${state.params[paramToUrl]}`);
         } else {
-            window.history.replaceState(state.url, false, state.url);
+            window.history.pushState(state.url, false, state.url);
         }
 
         fetch(state.template)
