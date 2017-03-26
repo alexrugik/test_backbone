@@ -4,9 +4,16 @@ export default Backbone.View.extend({
     el: '#users',
     template: '#usersTemplate',
     initialize() {
+        window.vw = this;
         this.listenTo(this.model, 'sync', () => {
             this.render();
         });
+        this.listenTo(this.model, 'change', () => {
+            this.render();
+        });
+        this.listenTo(this.model, 'remove', (model) => {
+        });
+
         this.model.fetch();
     },
     render() {
@@ -16,5 +23,14 @@ export default Backbone.View.extend({
         }, this);
         return this;
     },
-    events: {}
+    events: {
+        'click .delete': 'deleteModelView'
+    },
+    deleteModelView(event) {
+        event.preventDefault();
+        const id = event.target.attributes.identity.textContent;
+        let modelToDelete = this.model.models.find(model => id === model.get('id'));
+        this.model.remove(modelToDelete).unbind(modelToDelete);
+        this.el.removeChild(document.getElementById(`user-${id}`));
+    }
 });

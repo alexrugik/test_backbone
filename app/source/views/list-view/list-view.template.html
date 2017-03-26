@@ -9,11 +9,12 @@
             <th>AGE</th>
             <th>GENDER</th>
             <th>COMPANY</th>
+            <th>DELETE EVENT</th>
         </tr>
         </thead>
         <tbody>
         <script id="usersTemplate" type="text/template">
-            <tr class="users">
+            <tr class="users" id="user-<%= id %>">
                 <td class="id"><%= id %></td>
                 <td class="name">
                     <a href="<%= '#user/' + id %>"><%= name %></a>
@@ -21,6 +22,11 @@
                 <td class="age"><%= age %></td>
                 <td class="gender"><%= gender %></td>
                 <td class="company"><%= company %></td>
+                <td class="delete">
+                    <span identity="<%= id %>" id="<%= id %>" class="glyphicon glyphicon-minus" aria-hidden="true">
+
+                    </span>
+                </td>
             </tr>
 
         </script>
