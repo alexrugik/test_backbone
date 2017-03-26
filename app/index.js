@@ -4,7 +4,7 @@ import RouterConfig from './config/app-routes';
 const AppView = Backbone.View.extend({
     el: 'body',
     initialize() {
-        Router(RouterConfig, 'default').startRouter();
+        Router(RouterConfig, 'users').startRouter();
     }
 });
 

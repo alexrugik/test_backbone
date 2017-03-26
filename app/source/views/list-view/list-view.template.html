@@ -17,7 +17,7 @@
             <tr class="users" id="user-<%= id %>">
                 <td class="id"><%= id %></td>
                 <td class="name">
-                    <a href="<%= '#user/' + id %>"><%= name %></a>
+                    <a onclick="changeState('user', {id: '<%=id %>'})"><%= name %></a>
                 </td>
                 <td class="age"><%= age %></td>
                 <td class="gender"><%= gender %></td>

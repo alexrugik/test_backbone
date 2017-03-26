@@ -1,9 +1,9 @@
-export default function (defaultRoute) {
-    return new Router(defaultRoute)
+export default function (config, defaultRoute) {
+    return new Router(config, defaultRoute)
 }
 
 class Router {
-    constructor(config, defaultRoute = 'default') {
+    constructor(config, defaultRoute) {
         this.config = config;
         this.defaultRoute = defaultRoute;
     }
@@ -17,19 +17,43 @@ class Router {
 
     initEventListeners() {
         document.addEventListener('DOMContentLoaded', this.__domLoadedCallBack.bind(this));
-        window.addEventListener('hashchange', this.__hashChangeCallBack.bind(this), true);
+        window.onpopstate = this.__onPopStateCallBack.bind(this);
+    }
+
+    __domLoadedCallBack() {
+        this.changeStateByUrl();
+        window.changeState = this.changeState.bind(this);
+    }
+
+    __onPopStateCallBack(event) {
+        this.changeStateByUrl();
+    }
+
+    changeStateByUrl() {
+        const state = this.__findStateByUrl(window.location.pathname);
+        this.changeUrl(state);
+    }
+
+    changeState(state, params) {
+        if (!this.config[state]) {
+            return;
+        }
+        if (params) {
+            this.config[state].params = params;
+        }
+        this.changeUrl(this.config[state]);
     }
 
     changeUrl(state) {
         if (!state) {
-            throw new Error('No State for changeUrl')
+            state = this.config[this.defaultRoute];
         }
 
         if (state.params) {
             const parsedUrl = state.url.split(':');
-            const paramToUrl = parsedUrl[1];
             const url = parsedUrl[0];
-            window.history.pushState(`${url}/${state.params[paramToUrl]}`, false, `${url}/${state.params[paramToUrl]}`);
+            const paramToUrl = parsedUrl[1];
+            window.history.pushState(`${url}${state.params[paramToUrl]}`, false, `${url}${state.params[paramToUrl]}`);
         } else {
             window.history.pushState(state.url, false, state.url);
         }
@@ -43,55 +67,23 @@ class Router {
             });
     }
 
-    __domLoadedCallBack() {
-        const pathname = document.location.pathname;
+    __findStateByUrl(url) {
+        if (this.config[url.replace('/', '')]) {
+            return this.config[url.replace('/', '')];
+        }
 
         let state;
-        Object.keys(this.config).findIndex(key => {
-            if (this.config[key].url === pathname) {
-                state = this.config[key]
+        Object.keys(this.config).forEach(key => {
+            if (!this.config[key].urlPattern) {
+                return;
             }
-            return this.config[key].url === pathname;
+            if (this.config[key].urlPattern.test(url)) {
+                state = this.config[key];
+                const param = state.url.split(':')[1];
+                state.params = {[param] :url.split('/')[2]};
+            }
         });
-
-        if (!state) {
-            return;
-        }
-        this.changeUrl(state);
-    }
-
-    __hashChangeCallBack() {
-        const state = this.__getStateByHash(this.config);
-        this.changeUrl(state);
-    }
-
-    __getStateByHash(config) {
-        const hash = document.location.hash;
-
-        // если точное совпадение, то возвращаем стейт
-        if (this.__isValidState(hash)) {
-            return config[hash];
-        }
-
-        if (!hash.includes('/')) {
-            return;
-        }
-
-        const keysWithInclude = Object.keys(config).filter(key => hash.includes(key.split(':')[0]));
-
-        const params = {};
-        if (keysWithInclude.length === 1) {
-            keysWithInclude.forEach(key => {
-                params[key.split(':')[1]] = hash.split('/')[1];
-            });
-            const state = config[keysWithInclude.pop()];
-            state.params = params;
-            return state;
-        }
-    }
-
-    __isValidState(hash) {
-        return this.config[hash] && this.config[hash].template;
+        return state;
     }
 }
 
