@@ -4,7 +4,6 @@ export default Backbone.View.extend({
     el: '#users',
     template: '#usersTemplate',
     initialize() {
-        window.vw = this;
         this.listenTo(this.model, 'sync', () => {
             this.render();
         });
@@ -28,9 +27,13 @@ export default Backbone.View.extend({
     },
     deleteModelView(event) {
         event.preventDefault();
-        const id = event.target.attributes.identity.textContent;
-        let modelToDelete = this.model.models.find(model => id === model.get('id'));
-        this.model.remove(modelToDelete).unbind(modelToDelete);
-        this.el.removeChild(document.getElementById(`user-${id}`));
+        try {
+            const id = event.target.attributes.identity.textContent;
+            let modelToDelete = this.model.models.find(model => id === model.get('id'));
+            this.model.remove(modelToDelete).unbind(modelToDelete);
+            this.el.removeChild(document.getElementById(`user-${id}`));
+        }
+        catch (e) {
+        }
     }
 });

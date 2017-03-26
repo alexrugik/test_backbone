@@ -53,16 +53,21 @@ class Router {
             const parsedUrl = state.url.split(':');
             const url = parsedUrl[0];
             const paramToUrl = parsedUrl[1];
-            window.history.pushState(`${url}${state.params[paramToUrl]}`, false, `${url}${state.params[paramToUrl]}`);
+            window.history.replaceState(`${url}${state.params[paramToUrl]}`, false, `${url}${state.params[paramToUrl]}`);
         } else {
-            window.history.pushState(state.url, false, state.url);
+            window.history.replaceState(state.url, false, state.url);
         }
 
-        fetch(`${window.location.origin}/${state.template}`)
+        fetch(state.template)
             .then(data => {
                 data.text().then(text => {
                     document.getElementById('view-main').innerHTML = text;
-                    state.controller(state.params);
+                    try {
+                        state.controller(state.params);
+                    }
+                    catch (e) {
+                        console.warn(e);
+                    }
                 });
             });
     }
@@ -80,7 +85,7 @@ class Router {
             if (this.config[key].urlPattern.test(url)) {
                 state = this.config[key];
                 const param = state.url.split(':')[1];
-                state.params = {[param] :url.split('/')[2]};
+                state.params = {[param]: url.split('/')[2]};
             }
         });
         return state;
